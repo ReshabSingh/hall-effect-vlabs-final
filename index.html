@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hall Effect</title>
+    <link rel="stylesheet" href="assets/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <form>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-lg-5">
+            <div class="tablehead obs spc mt-1" id="tablehead">
+              <h4>OBSERVATION TABLE</h4>
+            </div>
+            <div class="table ">
+              <table id="table1">
+                <tr>
+                  <th>Sr no.</th>
+                  <th>Current (mA)</th>
+                  <th>Voltage (mv)</th>
+                </tr>
+                <tr>
+                  <td><input class="srno" type="text" /></td>
+                  <td><input class="curr" type="text" /></td>
+                  <td><input class="voltage" type="text" /></td>
+                </tr>
+                <tr>
+                  <td><input class="srno" type="text" /></td>
+                  <td><input class="curr" type="text" /></td>
+                  <td><input class="voltage" type="text" /></td>
+                </tr>
+                <tr>
+                  <td><input class="srno" type="text" /></td>
+                  <td><input class="curr" type="text" /></td>
+                  <td><input class="voltage" type="text" /></td>
+                </tr>
+                <tr>
+                  <td><input class="srno" type="text" /></td>
+                  <td><input class="curr" type="text" /></td>
+                  <td><input class="voltage" type="text" /></td>
+                </tr>
+                <tr>
+                  <td><input class="srno" type="text" /></td>
+                  <td><input class="curr" type="text" /></td>
+                  <td><input class="voltage" type="text" /></td>
+                </tr>
+                <tr>
+                  <td><input class="srno" type="text" /></td>
+                  <td><input class="curr" type="text" /></td>
+                  <td><input class="voltage" type="text" /></td>
+                </tr>
+                <tr>
+                  <td><input class="srno" type="text" /></td>
+                  <td><input class="curr" type="text" /></td>
+                  <td><input class="voltage" type="text" /></td>
+                </tr>
+                <tr>
+                  <td><input class="srno" type="text" /></td>
+                  <td><input class="curr" type="text" /></td>
+                  <td><input class="voltage" type="text" /></td>
+                </tr>
+                <tr>
+                  <td><input class="srno" type="text" /></td>
+                  <td><input class="curr" type="text" /></td>
+                  <td><input class="voltage" type="text" /></td>
+                </tr>
+                <tr>
+                  <td><input class="srno" type="text" /></td>
+                  <td><input class="curr" type="text" /></td>
+                  <td><input class="voltage" type="text" /></td>
+                </tr>
+              </table>
+            </div>
+
+            <div class="flex w-100">
+              <div class="tablehead obs spc" id="tablehead">
+                <h4>CALCULATION</h4>
+              </div>
+              <div class="value-display">
+                Electromagnet Current Value: <span>1 A</span>
+              </div>
+              <button type="button" class="btn btn-outline-primary mt-2" id="insertProbe">Insert Probe</button>
+              <div class="slider-container py-2">
+                <label>Probe Current: </label>
+                <input
+                  type="range"
+                  id="range"
+                  min="10"
+                  max="100"
+                  value="10"
+                  step="10"
+                  oninput="updateValue(this.value)"
+                />
+                <div class="value-display">
+                  Current: <span id="sliderValue">0.000</span>
+                </div>
+              </div>
+              <div>
+                Voltage: <span id="sliderValue2">0</span>
+              </div>
+              <!-- <button type="button" class="btn btn-outline-primary mr-4" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >Graph</button> -->
+              <!-- <button type="button" class="btn btn-primary mx-4"  id="downloadj">Download</button> -->
+            </div>
+
+            <div class="formula">
+              
+
+              <div class="ebg py-2">
+                <div class="py-3 calcbtn">
+                  <button type="button" id="addtable" class="btn btn-outline-primary mr-4">
+                    ADD To Table
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-outline-primary mr-4"
+                    data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop"
+                  >
+                    Graph
+                  </button>
+                  <!-- <button class="btn btn-outline-primary ebgbtn">
+                    Calculate
+                  </button> -->
+                  <button type="button" class="btn btn-outline-primary ml-3" id="download">
+                    Download
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-lg-7 bt">
+            <div class="center-height">
+              <div class="simulation-container">
+                <div class="overlay" id="overlay"></div>
+                <object
+                  type="image/svg+xml"
+                  class="ml-4"
+                  id="main-svg"
+                  data="./assets/Hall1.svg"
+                ></object>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div
+    class="modal fade"
+    id="staticBackdrop"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Graph</h1>
+          <button
+            type="button"
+            class="close"
+            aria-label="Close"
+            data-bs-dismiss="modal"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="graph p-4" id="graph" style="margin-top: 10px">
+            <div class="tablehead obs" id="graphhead">
+              <h5>Current vs Voltage</h5>
+            </div>
+            <canvas id="myChart"></canvas>
+          </div>
+
+            <h4 class="svalue">Slope is<span class="slopev"></span></h4>
+          
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="button" class="btn btn-primary calcslope">
+            Calculate The Slope
+          </button>
+          <button type="button" class="btn btn-primary" id="downloadgraph">
+            Download Graph
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function changeSVG() {
+      const btn = document.getElementById("insertProbe");
+      const svgObject = document.getElementById("main-svg");
+      const overlay = document.getElementById("overlay");
+  
+      btn.addEventListener("click", () => {
+        // Show white overlay (smooth fade-out look)
+        overlay.classList.add("show");
+  
+        // Wait for fade, then change SVG
+        setTimeout(() => {
+          svgObject.setAttribute("data", "./assets/Hall2.svg");
+  
+          // When SVG loads, fade overlay out
+          svgObject.addEventListener("load", () => {
+            overlay.classList.remove("show");
+          }, { once: true });
+        }, 500);
+      });
+    }
+    sessionStorage.setItem("circuitComplete", true);
+    changeSVG();
+  </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+  <script src="tableGraph.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"
+    ></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- <script src="./tablegraphPhy4.js"></script>  -->
+    <!-- <script src="index.js"></script> -->
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
+ 
